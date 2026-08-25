@@ -1,0 +1,20 @@
+services:
+  searxng:
+    image: searxng/searxng:latest
+    container_name: affiliate-scraper-searxng
+    ports:
+      - "8889:8080"
+    volumes:
+      - ./searxng:/etc/searxng:rw
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8889
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: affiliate-scraper-flaresolverr
+    ports:
+      - "8192:8191"
+    environment:
+      - LOG_LEVEL=info
+    restart: unless-stopped
